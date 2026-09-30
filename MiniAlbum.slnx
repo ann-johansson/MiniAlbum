@@ -5,4 +5,7 @@
     <Project Path="src/MiniAlbum.Domain/MiniAlbum.Domain.csproj" />
     <Project Path="src/MiniAlbum.Infrastructure/MiniAlbum.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MiniAlbum.Domain.Tests/MiniAlbum.Domain.Tests.csproj" />
+  </Folder>
 </Solution>
