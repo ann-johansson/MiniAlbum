@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MiniAlbum.Api/MiniAlbum.Api.csproj" />
+    <Project Path="src/MiniAlbum.Application/MiniAlbum.Application.csproj" />
+    <Project Path="src/MiniAlbum.Domain/MiniAlbum.Domain.csproj" />
+    <Project Path="src/MiniAlbum.Infrastructure/MiniAlbum.Infrastructure.csproj" />
+  </Folder>
+</Solution>
