@@ -14,5 +14,15 @@ namespace MiniAlbum.Domain.Entities
 
         public virtual ICollection<Photo> Photos { get; protected set; }
             = new List<Photo>();
+
+        public virtual void AddPhoto(Photo photo)
+        {
+            if (photo == null)
+            {
+                throw new ArgumentNullException(nameof(photo));
+            }
+            Photos.Add(photo);
+            photo.Album = this;
+        }
     }
 }
