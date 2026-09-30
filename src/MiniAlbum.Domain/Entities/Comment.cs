@@ -12,8 +12,6 @@ namespace MiniAlbum.Domain.Entities
 
         public virtual DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public virtual int PhotoId { get; set; }
-
         public virtual Photo Photo { get; set; } = null!;
     }
 }

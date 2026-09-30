@@ -14,8 +14,6 @@ namespace MiniAlbum.Domain.Entities
 
         public virtual string FileName { get; set; } = string.Empty;
 
-        public virtual int AlbumId { get; set; }
-
         public virtual Album Album { get; set; } = null!;
 
         public virtual ICollection<Comment> Comments { get; protected set; }
