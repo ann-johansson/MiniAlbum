@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping
+	xmlns="urn:nhibernate-mapping-2.2"
+	assembly="MiniAlbum.Domain"
+	namespace="MiniAlbum.Domain.Entities">
+
+	<class name="Album" table="Albums">
+
+		<id name="Id" column="Id">
+			<generator class="native" />
+		</id>
+
+		<property
+			name="Title"
+			column="Title"
+			not-null="true"
+			length="200"/>
+
+		<property
+			name="Description"
+			column="Description"
+			not-null="false"
+			length="1000"/>
+
+	</class>
+		
+</hibernate-mapping>

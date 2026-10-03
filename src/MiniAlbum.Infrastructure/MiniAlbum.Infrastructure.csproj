@@ -1,8 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <None Remove="Persistence\Mappings\Album.hbm.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Persistence\Mappings\Album.hbm.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MiniAlbum.Application\MiniAlbum.Application.csproj" />
     <ProjectReference Include="..\MiniAlbum.Domain\MiniAlbum.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NHibernate" Version="5.7.0" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
   </ItemGroup>
 
   <PropertyGroup>
