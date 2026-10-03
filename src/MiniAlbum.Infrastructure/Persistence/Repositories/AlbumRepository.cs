@@ -4,6 +4,7 @@ using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using NHibernate.Linq;
 
 namespace MiniAlbum.Infrastructure.Persistence.Repositories
 {
@@ -24,6 +25,16 @@ namespace MiniAlbum.Infrastructure.Persistence.Repositories
             await _session.SaveAsync(album, cancellationToken);
 
             return album.Id;
+        }
+
+        public async Task<IReadOnlyList<Album>> GetAllAsync(
+            CancellationToken cancellationToken = default)
+        {
+            var albums = await _session
+                .Query<Album>()
+                .ToListAsync(cancellationToken);
+
+            return albums;
         }
     }
 }

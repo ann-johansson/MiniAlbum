@@ -10,5 +10,8 @@ namespace MiniAlbum.Application.Abstractions.Persistence
         Task<int> AddAsync(
             Album album,
             CancellationToken cancellationToken = default);
+
+        Task<IReadOnlyList<Album>> GetAllAsync(
+            CancellationToken cancellationToken = default);
     }
 }
