@@ -34,6 +34,10 @@ namespace MiniAlbum.Infrastructure
 
             });
 
+            nhConfiguration.SetProperty(
+                NHibernate.Cfg.Environment.Hbm2ddlAuto,
+                "update");
+
             nhConfiguration.AddAssembly(typeof(DependencyInjection).Assembly);
 
             var sessionFactory =
