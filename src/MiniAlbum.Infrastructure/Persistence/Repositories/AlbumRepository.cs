@@ -22,7 +22,12 @@ namespace MiniAlbum.Infrastructure.Persistence.Repositories
             CancellationToken cancellationToken = default)
         {
             ArgumentNullException.ThrowIfNull(album);
+
+            using var transaction = _session.BeginTransaction();
+
             await _session.SaveAsync(album, cancellationToken);
+
+            await transaction.CommitAsync(cancellationToken);
 
             return album.Id;
         }
