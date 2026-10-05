@@ -23,6 +23,17 @@
 			not-null="false"
 			length="1000"/>
 
+		<bag name="Photos"
+			 inverse="true"
+			 cascade="all-delete-orphan">
+
+			<key column="AlbumId" />
+
+			<one-to-many class="Photo" />
+
+		</bag>
+			
+
 	</class>
 		
 </hibernate-mapping>

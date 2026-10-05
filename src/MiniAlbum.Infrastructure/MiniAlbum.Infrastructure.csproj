@@ -2,10 +2,14 @@
 
   <ItemGroup>
     <None Remove="Persistence\Mappings\Album.hbm.xml" />
+    <None Remove="Persistence\Mappings\Comment.hbm.xml" />
+    <None Remove="Persistence\Mappings\Photo.hbm.xml" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Persistence\Mappings\Album.hbm.xml" />
+    <EmbeddedResource Include="Persistence\Mappings\Comment.hbm.xml" />
+    <EmbeddedResource Include="Persistence\Mappings\Photo.hbm.xml" />
   </ItemGroup>
 
   <ItemGroup>
