@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using MiniAlbum.Application.Abstractions.Messaging;
 using MiniAlbum.Application.Albums.Commands.CreateAlbum;
+using MiniAlbum.Application.Albums.Queries.GetAlbumById;
 using MiniAlbum.Application.Albums.Queries.GetAlbums;
 
 namespace MiniAlbum.Application
@@ -22,6 +23,10 @@ namespace MiniAlbum.Application
             services.AddScoped<
                 IQueryHandler<GetAlbumsQuery, IReadOnlyList<AlbumResult>>,
                 GetAlbumsQueryHandler>();
+
+            services.AddScoped<
+                IQueryHandler<GetAlbumByIdQuery, AlbumResult?>,
+                GetAlbumByIdQueryHandler>();
 
             return services;
         }

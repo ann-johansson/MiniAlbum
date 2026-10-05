@@ -41,5 +41,14 @@ namespace MiniAlbum.Infrastructure.Persistence.Repositories
 
             return albums;
         }
+
+        public async Task<Album?> GetByIdAsync(
+            int id,
+            CancellationToken cancellationToken = default)
+        {
+            return await _session.GetAsync<Album>(
+                id,
+                cancellationToken);
+        }
     }
 }

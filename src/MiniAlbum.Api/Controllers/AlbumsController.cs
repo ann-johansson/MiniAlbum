@@ -2,6 +2,7 @@
 using MiniAlbum.Application.Abstractions.Messaging;
 using MiniAlbum.Application.Albums.Commands.CreateAlbum;
 using MiniAlbum.Application.Albums.Queries.GetAlbums;
+using MiniAlbum.Application.Albums.Queries.GetAlbumById;
 
 namespace MiniAlbum.Api.Controllers
 {
@@ -40,6 +41,26 @@ namespace MiniAlbum.Api.Controllers
                 cancellationToken);
 
             return Ok(albums);
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetAlbumById(
+            int id,
+            CancellationToken cancellationToken)
+        {
+            var album = await _dispatcher.SendAsync(
+                new GetAlbumByIdQuery
+                {
+                    Id = id
+                },
+                cancellationToken);
+
+            if (album == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(album);
         }
     }
 }
