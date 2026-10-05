@@ -2,8 +2,8 @@
 
 <hibernate-mapping
 	xmlns="urn:nhibernate-mapping-2.2"
-	assembly="Minialbum.Domain"
-	namespace="Minialbum.Domain.Entities">
+	assembly="MiniAlbum.Domain"
+	namespace="MiniAlbum.Domain.Entities">
 
 	<class name="Comment" table="Comments">
 
