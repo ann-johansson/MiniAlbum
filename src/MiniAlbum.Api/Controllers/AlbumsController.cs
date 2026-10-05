@@ -1,0 +1,45 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using MiniAlbum.Application.Abstractions.Messaging;
+using MiniAlbum.Application.Albums.Commands.CreateAlbum;
+using MiniAlbum.Application.Albums.Queries.GetAlbums;
+
+namespace MiniAlbum.Api.Controllers
+{
+
+    [ApiController]
+    [Route("api/albums")]
+    public class AlbumsController : ControllerBase
+    {
+        private readonly IDispatcher _dispatcher;
+
+        public AlbumsController(IDispatcher dispatcher)
+        {
+            _dispatcher = dispatcher;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAlbum(
+            CreateAlbumCommand command,
+            CancellationToken cancellationToken)
+        {
+            var albumId = await _dispatcher.SendAsync(
+                command,
+                cancellationToken);
+
+            return Created(
+                $"/api/albums/{albumId}",
+                new { id = albumId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAlbums(
+            CancellationToken cancellationToken)
+        {
+            var albums = await _dispatcher.SendAsync(
+                new GetAlbumsQuery(),
+                cancellationToken);
+
+            return Ok(albums);
+        }
+    }
+}
