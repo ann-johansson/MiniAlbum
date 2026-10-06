@@ -1,29 +1,30 @@
-# Welcome to your Lovable project
+# MiniAlbum (static SPA)
 
-This project was built with [Lovable](https://lovable.dev).
+Plain Vite + React + TypeScript frontend for the MiniAlbum ASP.NET Core API.
 
-## Build with Lovable
+## Setup
+    cp .env.example .env      # set VITE_API_URL to your API address
+    npm install
+    npm run dev               # local development
+    npm run build             # static output in dist/
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+`VITE_API_URL` is baked in at build time, so set it before `npm run build`
+(e.g. as a Docker build arg). The API must allow CORS from the frontend origin.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+## nginx
+Serve `dist/` and fall back to index.html so refreshing /albums/:id works:
 
-## Development
+    location / {
+        root /usr/share/nginx/html;
+        try_files $uri /index.html;
+    }
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+## Structure
+    index.html
+    src/main.tsx            entry: React Query + Router providers
+    src/App.tsx             header, footer, routes (/ and /albums/:albumId)
+    src/pages/HomePage.tsx  album list + create album
+    src/pages/AlbumPage.tsx album details, photos + add photo
+    src/components/         shared UI (buttons, fields, dialog)
+    src/lib/api.ts          the only place that talks to the API
+    src/styles.css          Tailwind + autumn design tokens

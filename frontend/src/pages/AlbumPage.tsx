@@ -1,26 +1,14 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link, useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, Leaf, Plus, RotateCcw } from "lucide-react";
 import { api, type Photo } from "@/lib/api";
 import { Button, Field, Modal, SkeletonGrid, StatusBox, printPalette, useSubmit } from "@/components/ui-kit";
 
-export const Route = createFileRoute("/albums/$albumId")({
-  head: () => ({
-    meta: [
-      { title: "Album — MiniAlbum" },
-      { name: "description", content: "View the photos in this MiniAlbum album." },
-      { property: "og:title", content: "Album — MiniAlbum" },
-      { property: "og:description", content: "View the photos in this MiniAlbum album." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: AlbumPage,
-});
 
-function AlbumPage() {
-  const { albumId } = Route.useParams();
+export default function AlbumPage() {
+  const { albumId = "" } = useParams();
+  useEffect(() => { document.title = "Album — MiniAlbum"; }, []);
   const [open, setOpen] = useState(false);
   const album = useQuery({ queryKey: ["album", albumId], queryFn: () => api.getAlbum(albumId) });
   const photos = useQuery({ queryKey: ["photos", albumId], queryFn: () => api.getPhotos(albumId) });

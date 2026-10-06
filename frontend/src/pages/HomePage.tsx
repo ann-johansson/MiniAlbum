@@ -1,26 +1,14 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, Leaf, Plus, RotateCcw } from "lucide-react";
 import { api } from "@/lib/api";
 import { Button, Field, Modal, SkeletonGrid, StatusBox, printPalette, useSubmit } from "@/components/ui-kit";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "MiniAlbum — Your photo albums" },
-      { name: "description", content: "Browse and create photo albums with MiniAlbum." },
-      { property: "og:title", content: "MiniAlbum — Your photo albums" },
-      { property: "og:description", content: "Browse and create photo albums with MiniAlbum." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: Home,
-});
 
-function Home() {
+export default function HomePage() {
   const [open, setOpen] = useState(false);
+  useEffect(() => { document.title = "MiniAlbum — Your photo albums"; }, []);
   const { data, isLoading, error, refetch } = useQuery({ queryKey: ["albums"], queryFn: api.getAlbums });
 
   return (
@@ -58,8 +46,7 @@ function Home() {
             {data.map((a, i) => (
               <Link
                 key={a.id}
-                to="/albums/$albumId"
-                params={{ albumId: String(a.id) }}
+                to={`/albums/${a.id}`}
                 className={`group paper-surface album-cover relative flex min-h-64 min-w-0 flex-col justify-between rounded-md border border-border p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift ${printPalette(a.title)}`}
               >
                 <span className="flex items-center justify-between text-xs text-muted-foreground">
