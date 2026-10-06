@@ -5,6 +5,7 @@ using MiniAlbum.Application.Albums.Queries.GetAlbums;
 using MiniAlbum.Application.Albums.Queries.GetAlbumById;
 using MiniAlbum.Application.Photos.Commands.CreatePhoto;
 using MiniAlbum.Api.Contracts.Photos;
+using MiniAlbum.Application.Photos.Queries.GetPhotosByAlbum;
 
 namespace MiniAlbum.Api.Controllers
 {
@@ -92,6 +93,21 @@ namespace MiniAlbum.Api.Controllers
             }
 
             return Ok(album);
+        }
+
+        [HttpGet("{albumId:int}/photos")]
+        public async Task<IActionResult> GetPhotos(
+            int albumId,
+            CancellationToken cancellationToken)
+        {
+            var photos = await _dispatcher.SendAsync(
+                new GetPhotosByAlbumQuery
+                {
+                    AlbumId = albumId
+                },
+                cancellationToken);
+
+            return Ok(photos);
         }
     }
 }

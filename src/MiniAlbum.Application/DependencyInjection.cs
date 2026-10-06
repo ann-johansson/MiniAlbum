@@ -7,6 +7,7 @@ using MiniAlbum.Application.Albums.Commands.CreateAlbum;
 using MiniAlbum.Application.Albums.Queries.GetAlbumById;
 using MiniAlbum.Application.Albums.Queries.GetAlbums;
 using MiniAlbum.Application.Photos.Commands.CreatePhoto;
+using MiniAlbum.Application.Photos.Queries.GetPhotosByAlbum;
 
 namespace MiniAlbum.Application
 {
@@ -32,6 +33,12 @@ namespace MiniAlbum.Application
             services.AddScoped<
                 ICommandHandler<CreatePhotoCommand, int?>,
                 CreatePhotoCommandHandler>();
+
+            services.AddScoped<
+                IQueryHandler<
+                    GetPhotosByAlbumQuery,
+                    IReadOnlyList<PhotoResult>>,
+                GetPhotosByAlbumQueryHandler>();
 
             return services;
         }
