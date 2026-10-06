@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping
+	xmlns="urn:nhibernate-mapping-2.2"
+	assembly="MiniAlbum.Domain"
+	namespace="MiniAlbum.Domain.Entities">
+
+	<class name="Comment" table="Comments">
+
+		<id name="Id" column="Id">
+			<generator class="native" />
+		</id>
+
+		<property
+			name="Text"
+			column="Text"
+			not-null="true"
+			length="2000" />
+
+		<property
+			name="CreatedAt"
+			column="CreatedAt"
+			not-null="true" />
+
+		<many-to-one
+			name="Photo"
+			class="Photo"
+			column="PhotoId"
+			not-null="true" />
+		
+	</class>
+	
+</hibernate-mapping>

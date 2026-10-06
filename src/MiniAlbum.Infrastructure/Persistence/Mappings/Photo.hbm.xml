@@ -5,7 +5,7 @@
 	assembly="MiniAlbum.Domain"
 	namespace="MiniAlbum.Domain.Entities">
 
-	<class name="Album" table="Albums">
+	<class name="Photo" table="Photos">
 
 		<id name="Id" column="Id">
 			<generator class="native" />
@@ -13,27 +13,38 @@
 
 		<property
 			name="Title"
-			column="Title"
+			column ="Title"
 			not-null="true"
-			length="200"/>
+			length="200" />
 
 		<property
 			name="Description"
 			column="Description"
 			not-null="false"
-			length="1000"/>
+			length="1000" />
 
-		<bag name="Photos"
+		<property
+			name="FileName"
+			column="Filename"
+			not-null="true"
+			length="500" />
+
+		<many-to-one
+			name="Album"
+			class="Album"
+			column="AlbumId"
+			not-null="true" />
+
+		<bag name="Comments"
 			 inverse="true"
 			 cascade="all-delete-orphan">
 
-			<key column="AlbumId" />
+			<key column="PhotoId" />
 
-			<one-to-many class="Photo" />
-
-		</bag>
+			<one-to-many class="Comment" />
 			
-
-	</class>
+		</bag>
+		
+		</class>
 		
 </hibernate-mapping>

@@ -2,10 +2,14 @@
 
   <ItemGroup>
     <None Remove="Persistence\Mappings\Album.hbm.xml" />
+    <None Remove="Persistence\Mappings\Comment.hbm.xml" />
+    <None Remove="Persistence\Mappings\Photo.hbm.xml" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Persistence\Mappings\Album.hbm.xml" />
+    <EmbeddedResource Include="Persistence\Mappings\Comment.hbm.xml" />
+    <EmbeddedResource Include="Persistence\Mappings\Photo.hbm.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -14,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.12" />
     <PackageReference Include="NHibernate" Version="5.7.0" />
     <PackageReference Include="Npgsql" Version="10.0.3" />
   </ItemGroup>
