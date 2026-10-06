@@ -3,6 +3,8 @@ using MiniAlbum.Application.Abstractions.Messaging;
 using MiniAlbum.Application.Albums.Commands.CreateAlbum;
 using MiniAlbum.Application.Albums.Queries.GetAlbums;
 using MiniAlbum.Application.Albums.Queries.GetAlbumById;
+using MiniAlbum.Application.Photos.Commands.CreatePhoto;
+using MiniAlbum.Api.Contracts.Photos;
 
 namespace MiniAlbum.Api.Controllers
 {
@@ -30,6 +32,35 @@ namespace MiniAlbum.Api.Controllers
             return Created(
                 $"/api/albums/{albumId}",
                 new { id = albumId });
+        }
+
+        [HttpPost("{albumId:int}/photos")]
+        public async Task<IActionResult> CreatePhoto(
+            int albumId,
+            CreatePhotoRequest request,
+            CancellationToken cancellationToken)
+        {
+
+            var command = new CreatePhotoCommand
+            {
+                AlbumId = albumId,
+                Title = request.Title,
+                Description = request.Description,
+                FileName = request.FileName
+            };
+
+            var photoId = await _dispatcher.SendAsync(
+                command,
+                cancellationToken);
+
+            if (photoId is null)
+            {
+                return NotFound();
+            }
+
+            return Created(
+                $"/api/albums/{albumId}/photos/{photoId}",
+                new { id = photoId });
         }
 
         [HttpGet]

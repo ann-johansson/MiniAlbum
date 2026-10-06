@@ -49,6 +49,7 @@ namespace MiniAlbum.Infrastructure
                 _ => sessionFactory.OpenSession());
 
             services.AddScoped<IAlbumRepository, AlbumRepository>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
 
             return services;
         }
